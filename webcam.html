@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<title>Webcam QR Test</title>
+<link href="css/ui-lightness/jquery-ui-1.9.2.custom.css" rel="stylesheet">
+<script src="js/jquery-1.10.2.min.js"></script>
+<script>
+	jQuery(document).bind("mobileinit", function() {
+	jQuery.mobile.defaultPageTransition = null;
+});
+</script>
+<script src="js/jqm/jquery.mobile-1.1.0-rc.1.min.js"></script>
+<script src="js/jquery.json-2.3.min.js"></script>
+<script src="js/jstorage.min.js"></script>
+<script src="js/jqm.page.params.js"></script>
+<script src="js/highcharts/highcharts.js"></script>
+<script src="js/jquery-ui-1.9.2.custom.min.js"></script>
+<script type="text/javascript" src="js/grid.js"></script>
+<script type="text/javascript" src="js/version.js"></script>
+<script type="text/javascript" src="js/detector.js"></script>
+<script type="text/javascript" src="js/formatinf.js"></script>
+<script type="text/javascript" src="js/errorlevel.js"></script>
+<script type="text/javascript" src="js/bitmat.js"></script>
+<script type="text/javascript" src="js/datablock.js"></script>
+<script type="text/javascript" src="js/bmparser.js"></script>
+<script type="text/javascript" src="js/datamask.js"></script>
+<script type="text/javascript" src="js/rsdecoder.js"></script>
+<script type="text/javascript" src="js/gf256poly.js"></script>
+<script type="text/javascript" src="js/gf256.js"></script>
+<script type="text/javascript" src="js/decoder.js"></script>
+<script type="text/javascript" src="js/QRCode.js"></script>
+<script type="text/javascript" src="js/findpat.js"></script>
+<script type="text/javascript" src="js/alignpat.js"></script>
+<script type="text/javascript" src="js/databr.js"></script>
+
+<script src="/webinos.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
+<style>
+.trasparent-button{
+	background: rgb(255, 255, 255);
+	background: rgba(255, 255, 255, 0.7);
+	border:0px;
+}
+#capture{
+	width:100px;
+	height:30px;
+	position:absolute;
+	left:350px;
+	top:530px;
+}
+
+#overlay{
+	position:absolute;
+	width: 800px;
+	height:600px;
+	left:0px;
+	top:0px;
+	background: rgba(255, 255, 255, 0.3);
+}
+#monitor{
+	position:absolute;
+	left:0px;
+	top:0px;
+}
+#serviceName{
+	font-weight:bold;
+}
+#serviceDescription{
+	font-size: small;
+}
+#sensorButton{
+	position:absolute;
+	width:100px;
+	height:50px;
+	left:500px;
+	top:20px;
+}
+#valueDiv{
+	position:absolute;
+	left:610px;
+	top:10px;
+}
+#values{
+	font-size: small;
+}
+#actuatorSlider{
+	
+}
+#sensor-chart{
+	background: rgba(255, 255, 255, 0.1);
+	position:absolute;
+	top:200px;
+	left:50px;
+	height:300px;
+	width:700px;
+}
+#photo{
+	position: absolute;
+	left: 0px;
+	top: 680px;
+	
+}
+#actuatorSlider{
+	width: 400px;
+}
+</style>
+</head>
+<body>
+
+<video id="monitor" autoplay width="800" ></video>
+
+<div id="overlay" style="display:none">
+	<p id="serviceName"></p>
+	<p id="serviceDescription"></p>
+	<button class="trasparent-button"id="sensorButton" onclick="listenSensor()" style="display: none"></button>
+	<div id="valueDiv" style="display:none">
+		<p><b>Value</b><br/><span id="values"></span>
+		</p>
+	</div>
+	<div id="chart-options" style="display: none">
+		Mode
+		<select id="graph-options">
+			<option value="">Choose mode</option>
+			<option value="fixedinterval">Fixed Interval</option>
+			<option value="valuechange">Value Change</option>
+		</select>
+		Rate<input type="text" id="rate"></input>
+		<button class="trasparent-button" id="options-button" onclick="applyOptions()">Apply</button>
+	</div>
+	<div id="sensor-chart" style="display:none"></div>
+	<div id="actuatorSlider" style="display:none"></div>
+	<button class="trasparent-button" id="actuatorButton" style="display: none" onclick="applyActuator()"></button>
+</div>
+<button class="trasparent-button" id="capture" style="display: none">Capture</button>
+<canvas id="photo" width="640px" height="480px" style="display: none"></canvas>
+
+</body>
+</html>
